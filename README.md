@@ -10,13 +10,9 @@
 ## interface
 
     bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
+    
 
-
-## test code
-
-there is test code in the file, read auto_stop_spherical_pano.jpg and generate 6 faces.
-
-6 face order: +X, -X, +Y, -Y, +Z, -Z
+outpaths 6 face order: +X, -X, +Y, -Y, +Z, -Z
 
     +X right
     -X left
@@ -35,9 +31,33 @@ correspond to OpenGL define:
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z 
 
 
+## test code
+
+there is test code in the file, read auto_stop_spherical_pano.jpg and generate 6 faces.
+
+
 test image:
 
 <img src="src/auto_stop_spherical_pano.jpg"/>
+
+generated image is:
+
+    src/auto_stop_spherical_pano0.png
+    src/auto_stop_spherical_pano1.png
+    src/auto_stop_spherical_pano2.png
+    src/auto_stop_spherical_pano3.png
+    src/auto_stop_spherical_pano4.png
+    src/auto_stop_spherical_pano5.png
+
+a correct result can be found in:
+
+    src/correct_result/auto_stop_spherical_pano0.png
+    src/correct_result/auto_stop_spherical_pano1.png
+    src/correct_result/auto_stop_spherical_pano2.png
+    src/correct_result/auto_stop_spherical_pano3.png
+    src/correct_result/auto_stop_spherical_pano4.png
+    src/correct_result/auto_stop_spherical_pano5.png
+
 
 left
 
