@@ -32,6 +32,11 @@ test code at the tail of the cpp file
     make -j12
 
 
+require install opencv first
+
+for macos:
+    
+    brew install opencv
 
 
 
