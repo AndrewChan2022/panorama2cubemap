@@ -2,7 +2,7 @@
 
 ## build test code
 
-test code at the tail of the file
+test code at the tail of the cpp file
 
     mkdir build && cd build
     cmake ..
