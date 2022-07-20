@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.1)
+project( pano2cube )
+
+# cxx11
+set(CMAKE_CXX_STANDARD 17)
+
+# include
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+
+# src
+message(STATUS "CMAKE_SOURCE_DIR::${CMAKE_SOURCE_DIR}")
+set (SRC_PATH ${CMAKE_SOURCE_DIR}/src)
+aux_source_directory(${SRC_PATH} DIR_SRCS)
+
+message(STATUS "${SRC_PATH}")
+message(STATUS "${DIR_SRCS}")
+
+# exe and lib
+add_executable( pano2cube ${DIR_SRCS} )
+target_link_libraries( pano2cube ${OpenCV_LIBS} )
+
