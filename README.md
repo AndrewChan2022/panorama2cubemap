@@ -37,11 +37,18 @@ test code at the tail of the cpp file
 
 run command:
 
-    pano2cube pano.jpg
+    ./pano2cube ../src/auto_stop_spherical_pano.jpg
 
 generate:
 
-    pano0.png pano1.png pano2.png pano3.png pano4.png pano5.png
+    ../src/auto_stop_spherical_pano0.png
+    ../src/auto_stop_spherical_pano1.png
+    ../src/auto_stop_spherical_pano2.png
+    ../src/auto_stop_spherical_pano3.png
+    ../src/auto_stop_spherical_pano4.png
+    ../src/auto_stop_spherical_pano5.png
+
+
 
 
 
