@@ -29,14 +29,19 @@ test image:
 
 left
 <img src="src/correct_result/auto_stop_spherical_pano1.png"/>
+
 front
 <img src="src/correct_result/auto_stop_spherical_pano4.png"/>
+
 right
 <img src="src/correct_result/auto_stop_spherical_pano0.png"/>
+
 back
 <img src="src/correct_result/auto_stop_spherical_pano5.png"/>
+
 top
 <img src="src/correct_result/auto_stop_spherical_pano2.png"/>
+
 bottom
 <img src="src/correct_result/auto_stop_spherical_pano3.png"/>
 
