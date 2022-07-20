@@ -1,6 +1,8 @@
 # panorama2cubemap
 
-## build
+## build test code
+
+test code at the tail of the file
 
     mkdir build && cd build
     cmake ..
@@ -31,7 +33,7 @@ correspond to OpenGL define:
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z 
 
 
-## test code
+## test result
 
 there is test code in the file, read auto_stop_spherical_pano.jpg and generate 6 faces.
 
