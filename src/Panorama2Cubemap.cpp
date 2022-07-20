@@ -212,6 +212,7 @@ static inline std::string getCurrentTimestamp() {
 
 static void testconvert() {
     std::string file_path = __FILE__;
+#ifdef _WIN64
     std::string dir_path = file_path.substr(0, file_path.rfind("/"));
     std::string filename = dir_path + "/auto_stop_spherical_pano.jpg";
     
@@ -223,6 +224,19 @@ static void testconvert() {
         dir_path + "/auto_stop_spherical_pano4.png",
         dir_path + "/auto_stop_spherical_pano5.png",
     };
+#else
+    std::string dir_path = file_path.substr(0, file_path.rfind("\\"));
+    std::string filename = dir_path + "\\auto_stop_spherical_pano.jpg";
+    
+    std::vector<std::string> outfiles = {
+        dir_path + "\\auto_stop_spherical_pano0.png",
+        dir_path + "\\auto_stop_spherical_pano1.png",
+        dir_path + "\\auto_stop_spherical_pano2.png",
+        dir_path + "\\auto_stop_spherical_pano3.png",
+        dir_path + "\\auto_stop_spherical_pano4.png",
+        dir_path + "\\auto_stop_spherical_pano5.png",
+    };
+#endif
     
     std::cout << "begin: " << getCurrentTimestamp() << std::endl;
     pano2cube(filename, outfiles, -1);
@@ -232,8 +246,14 @@ static void testconvert() {
 
 static void testconvertAndView() {
     std::string file_path = __FILE__;
+    
+#ifdef _WIN64
+    std::string dir_path = file_path.substr(0, file_path.rfind("\\"));
+    std::string filename = dir_path + "\\auto_stop_spherical_pano.jpg";
+#else
     std::string dir_path = file_path.substr(0, file_path.rfind("/"));
     std::string filename = dir_path + "/auto_stop_spherical_pano.jpg";
+#endif
     
     cv::Mat in;
     in = cv::imread( filename, 1 );
@@ -259,11 +279,72 @@ static void testconvertAndView() {
 }
 
 
-int main(int argc, const char * argv[]) {
+int testmain(int argc, const char * argv[]) {
 
     testconvert();
     testconvertAndView();
 
+    return 0;
+}
+
+int main(int argc, const char * argv[]) {
+    
+    if (argc < 2) {
+        printf("no input file, correct format:\npano2cube input_file\n");
+        return -1;
+    }
+    
+#ifdef _WIN64
+    std::string file_path = argv[1];
+    
+    std::string dir_path = ".";
+    std::string file_name = file_path;
+    if (file_path.rfind("/") != std::string::npos) {
+        dir_path = file_path.substr(0, file_path.rfind("/"));
+        file_name = file_path.substr(file_path.rfind("/") + 1);
+    }
+    file_name = file_name.substr(0, file_path.rfind("."));
+    
+    std::string infile = file_path;
+    
+    std::vector<std::string> outfiles = {
+        dir_path + "\\" + file_name + "0.png",
+        dir_path + "\\" + file_name + "1.png",
+        dir_path + "\\" + file_name + "2.png",
+        dir_path + "\\" + file_name + "3.png",
+        dir_path + "\\" + file_name + "4.png",
+        dir_path + "\\" + file_name + "5.png",
+    };
+#else
+    std::string file_path = argv[1];
+    
+    std::string dir_path = ".";
+    std::string file_name = file_path;
+    if (file_path.rfind("/") != std::string::npos) {
+        dir_path = file_path.substr(0, file_path.rfind("/"));
+        file_name = file_path.substr(file_path.rfind("/") + 1);
+    }
+    file_name = file_name.substr(0, file_name.rfind("."));
+    
+    std::string infile = file_path;
+    
+    std::vector<std::string> outfiles = {
+        dir_path + "/" + file_name + "0.png",
+        dir_path + "/" + file_name + "1.png",
+        dir_path + "/" + file_name + "2.png",
+        dir_path + "/" + file_name + "3.png",
+        dir_path + "/" + file_name + "4.png",
+        dir_path + "/" + file_name + "5.png",
+    };
+#endif
+    
+    pano2cube(infile, outfiles, -1);
+    
+    printf("save images to path:\n");
+    for (auto& path : outfiles) {
+        printf("    %s\n", path.c_str());
+    }
+    
     return 0;
 }
 

@@ -25,18 +25,24 @@ correspond to OpenGL define:
     
 ## build test code
 
+require install opencv first, for macos:
+    
+    brew install opencv
+
 test code at the tail of the cpp file
 
     mkdir build && cd build
     cmake ..
     make -j12
 
+run command:
 
-require install opencv first
+    pano2cube pano.jpg
 
-for macos:
-    
-    brew install opencv
+generate:
+
+    pano0.png pano1.png pano2.png pano3.png pano4.png pano5.png
+
 
 
 
