@@ -1,15 +1,18 @@
 # panorama2cubemap
 
-##build
+## build
 
     mkdir build && cd build
     cmake ..
     make -j12
 
 
-##interface
+## interface
 
     bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
+
+
+## test code
 
 there is test code in the file, read auto_stop_spherical_pano.jpg and generate 6 faces.
 
@@ -21,6 +24,15 @@ there is test code in the file, read auto_stop_spherical_pano.jpg and generate 6
     -Y bottom
     +Z front
     -Z back
+    
+correspond to OpenGL define:
+
+    GL_TEXTURE_CUBE_MAP_POSITIVE_X
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_X
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Y
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Y
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Z
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z 
 
 
 test image:
