@@ -1,14 +1,5 @@
 # panorama2cubemap
 
-## build test code
-
-test code at the tail of the cpp file
-
-    mkdir build && cd build
-    cmake ..
-    make -j12
-
-
 ## interface
 
     bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
@@ -31,6 +22,17 @@ correspond to OpenGL define:
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Y
     GL_TEXTURE_CUBE_MAP_POSITIVE_Z
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z 
+    
+## build test code
+
+test code at the tail of the cpp file
+
+    mkdir build && cd build
+    cmake ..
+    make -j12
+
+
+
 
 
 ## test result
