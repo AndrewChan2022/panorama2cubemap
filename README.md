@@ -105,3 +105,6 @@ bottom
 
 <img src="src/correct_result/auto_stop_spherical_pano3.png"/>
 
+## Acknowledgements
+
+The code for converting an equirectangular panorama to a cube map was taken from [this stackoverflow answer](https://stackoverflow.com/a/34720686/130060).
