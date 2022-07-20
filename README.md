@@ -29,7 +29,7 @@ require install opencv first, for macos:
     
     brew install opencv
 
-test code at the tail of the cpp file
+build, the test code at the tail of the cpp file
 
     mkdir build && cd build
     cmake ..
