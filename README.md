@@ -2,6 +2,9 @@
 
 code from https://stackoverflow.com/a/34720686/2482283
 
+other implement:
+c++ without dependency:  https://github.com/chinhsuanwu/360-converter
+python: https://github.com/sunset1995/py360convert
 
 ## interface
 
