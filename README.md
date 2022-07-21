@@ -1,5 +1,8 @@
 # panorama2cubemap
 
+code from https://stackoverflow.com/a/34720686/2482283
+
+
 ## interface
 
     bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
