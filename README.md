@@ -1,5 +1,12 @@
 # panorama2cubemap
 
+This project has been tested on:
+
+macOS 12.4 Monterey
+
+XCode 13.4.1
+
+
 code from https://stackoverflow.com/a/34720686/2482283
 
 other implement:
