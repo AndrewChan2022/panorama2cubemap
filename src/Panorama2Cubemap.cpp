@@ -157,11 +157,17 @@ inline void createCubeMapFace(const cv::Mat &in, cv::Mat &face,
     }
 
     // Do actual resampling using OpenCV's remap
-    remap(in, face, mapx, mapy,
-         cv::INTER_LINEAR, cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0));
+    remap(in, face, mapx, mapy, cv::INTER_LINEAR, cv::BORDER_CONSTANT, cv::Scalar(0, 0, 0));
+    if (faceId == 2) {
+        // top, rotation clockwise
+        cv::rotate(face, face, cv::ROTATE_90_CLOCKWISE );
+    } else if (faceId == 3) {
+        // bottom, rotation anti-clockwise
+        cv::rotate(face, face, cv::ROTATE_90_COUNTERCLOCKWISE );
+    }
 }
 
-bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width) {
+bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, std::string mergedPath, int width) {
     
     // check input file and out file count
     assert(outpaths.size() == 6);
@@ -179,11 +185,34 @@ bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width
     
     // convert to cubemap
     // +x -x +y -x +z -z
+    cv::Mat outs[6];
     for (int faceid = 0; faceid < 6; faceid++) {
-        cv::Mat out;
+        cv::Mat& out = outs[faceid];
         createCubeMapFace(in, out, faceid, width, width);  // 10ms
         cv::imwrite(outpaths[faceid], out);                // 15ms
     }
+    
+    // merge
+    // right    +x
+    // left     -x
+    // top      +y
+    // bottom   -y
+    // front    +z
+    // back     -z
+    
+    int w = outs[0].cols;
+    int h = outs[0].rows;
+    cv::Mat merged(h*3, w*4, in.type());
+    
+    //cv::Mat imgPanelRoi(merged, cv::Rect(0, 0, w, h));
+    outs[1].copyTo(merged(cv::Rect(0, h, w, h))); // left
+    outs[4].copyTo(merged(cv::Rect(w, h, w, h))); // front
+    outs[0].copyTo(merged(cv::Rect(2*w, h, w, h))); // right
+    outs[5].copyTo(merged(cv::Rect(3*w, h, w, h))); // back
+    outs[2].copyTo(merged(cv::Rect(1*w, 0, w, h))); // top
+    outs[3].copyTo(merged(cv::Rect(1*w, 2*h, w, h))); // bottom
+    
+    cv::imwrite(mergedPath, merged);
     
     return true;
 }
@@ -224,6 +253,7 @@ static void testconvert() {
         dir_path + "/auto_stop_spherical_pano4.png",
         dir_path + "/auto_stop_spherical_pano5.png",
     };
+    std::string mergedPath = dir_path + "/auto_stop_spherical_pano6.png";
 #else
     std::string dir_path = file_path.substr(0, file_path.rfind("\\"));
     std::string filename = dir_path + "\\auto_stop_spherical_pano.jpg";
@@ -236,10 +266,11 @@ static void testconvert() {
         dir_path + "\\auto_stop_spherical_pano4.png",
         dir_path + "\\auto_stop_spherical_pano5.png",
     };
+    std::string mergedPath = dir_path + "\\auto_stop_spherical_pano6.png";
 #endif
     
     std::cout << "begin: " << getCurrentTimestamp() << std::endl;
-    pano2cube(filename, outfiles, -1);
+    pano2cube(filename, outfiles, mergedPath, -1);
     std::cout << "end: " << getCurrentTimestamp() << std::endl;
 }
 
@@ -315,6 +346,7 @@ int main(int argc, const char * argv[]) {
         dir_path + "\\" + file_name + "4.png",
         dir_path + "\\" + file_name + "5.png",
     };
+    std::string mergedPath = dir_path + "\\auto_stop_spherical_pano6.png";
 #else
     std::string file_path = argv[1];
     
@@ -336,9 +368,10 @@ int main(int argc, const char * argv[]) {
         dir_path + "/" + file_name + "4.png",
         dir_path + "/" + file_name + "5.png",
     };
+    std::string mergedPath = dir_path + "/auto_stop_spherical_pano6.png";
 #endif
     
-    pano2cube(infile, outfiles, -1);
+    pano2cube(infile, outfiles, mergedPath, -1);
     
     printf("save images to path:\n");
     for (auto& path : outfiles) {
