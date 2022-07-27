@@ -15,6 +15,10 @@ c++ without dependency:  https://github.com/chinhsuanwu/360-converter
 
 python: https://github.com/sunset1995/py360convert
 
+online test tools:  https://shakthijuego.github.io/skybox-viewer/dist/index.html
+
+imagemagick script: http://www.fmwconcepts.com/imagemagick/sphericalpano2cube/index.php
+
 ## interface
 
     bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
@@ -119,4 +123,8 @@ top
 bottom
 
 <img src="src/correct_result/auto_stop_spherical_pano3.png"/>
+
+merged 
+
+<img src="src/correct_result/auto_stop_spherical_pano6.png"/>
 
