@@ -1,5 +1,20 @@
 # panorama2cubemap
 
+This project has been tested on:
+
+macOS 12.4 Monterey
+
+XCode 13.4.1
+
+
+code from https://stackoverflow.com/a/34720686/2482283
+
+other implement:
+
+c++ without dependency:  https://github.com/chinhsuanwu/360-converter
+
+python: https://github.com/sunset1995/py360convert
+
 ## interface
 
     bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
