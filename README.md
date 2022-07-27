@@ -25,7 +25,7 @@ https://shakthijuego.github.io/skybox-viewer/dist/index.html
 
 ## interface
 
-    bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
+    bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1, std::string mergedPath = "");
     
 
 outpaths 6 face order: +X, -X, +Y, -Y, +Z, -Z
