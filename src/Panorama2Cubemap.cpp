@@ -167,7 +167,7 @@ inline void createCubeMapFace(const cv::Mat &in, cv::Mat &face,
     }
 }
 
-bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, std::string mergedPath, int width) {
+bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width, std::string mergedPath) {
     
     // check input file and out file count
     assert(outpaths.size() == 6);
@@ -192,27 +192,29 @@ bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, std::stri
         cv::imwrite(outpaths[faceid], out);                // 15ms
     }
     
-    // merge
-    // right    +x
-    // left     -x
-    // top      +y
-    // bottom   -y
-    // front    +z
-    // back     -z
-    
-    int w = outs[0].cols;
-    int h = outs[0].rows;
-    cv::Mat merged(h*3, w*4, in.type());
-    
-    //cv::Mat imgPanelRoi(merged, cv::Rect(0, 0, w, h));
-    outs[1].copyTo(merged(cv::Rect(0, h, w, h))); // left
-    outs[4].copyTo(merged(cv::Rect(w, h, w, h))); // front
-    outs[0].copyTo(merged(cv::Rect(2*w, h, w, h))); // right
-    outs[5].copyTo(merged(cv::Rect(3*w, h, w, h))); // back
-    outs[2].copyTo(merged(cv::Rect(1*w, 0, w, h))); // top
-    outs[3].copyTo(merged(cv::Rect(1*w, 2*h, w, h))); // bottom
-    
-    cv::imwrite(mergedPath, merged);
+    if (mergedPath != "") {
+        // merge
+        // right    +x
+        // left     -x
+        // top      +y
+        // bottom   -y
+        // front    +z
+        // back     -z
+        
+        int w = outs[0].cols;
+        int h = outs[0].rows;
+        cv::Mat merged(h*3, w*4, in.type());
+        
+        //cv::Mat imgPanelRoi(merged, cv::Rect(0, 0, w, h));
+        outs[1].copyTo(merged(cv::Rect(0, h, w, h))); // left
+        outs[4].copyTo(merged(cv::Rect(w, h, w, h))); // front
+        outs[0].copyTo(merged(cv::Rect(2*w, h, w, h))); // right
+        outs[5].copyTo(merged(cv::Rect(3*w, h, w, h))); // back
+        outs[2].copyTo(merged(cv::Rect(1*w, 0, w, h))); // top
+        outs[3].copyTo(merged(cv::Rect(1*w, 2*h, w, h))); // bottom
+        
+        cv::imwrite(mergedPath, merged);
+    }
     
     return true;
 }
