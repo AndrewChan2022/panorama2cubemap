@@ -15,9 +15,13 @@ c++ without dependency:  https://github.com/chinhsuanwu/360-converter
 
 python: https://github.com/sunset1995/py360convert
 
-online test tools:  https://shakthijuego.github.io/skybox-viewer/dist/index.html
 
 imagemagick script: http://www.fmwconcepts.com/imagemagick/sphericalpano2cube/index.php
+
+
+## online test tools
+
+https://shakthijuego.github.io/skybox-viewer/dist/index.html
 
 ## interface
 
