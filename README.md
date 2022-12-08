@@ -1,8 +1,31 @@
 # panorama2cubemap
 
+This project has been tested on:
+
+macOS 12.4 Monterey
+
+XCode 13.4.1
+
+
+code from https://stackoverflow.com/a/34720686/2482283
+
+other implement:
+
+c++ without dependency:  https://github.com/chinhsuanwu/360-converter
+
+python: https://github.com/sunset1995/py360convert
+
+
+imagemagick script: http://www.fmwconcepts.com/imagemagick/sphericalpano2cube/index.php
+
+
+## online test tools
+
+https://shakthijuego.github.io/skybox-viewer/dist/index.html
+
 ## interface
 
-    bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1);
+    bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width = -1, std::string mergedPath = "");
     
 
 outpaths 6 face order: +X, -X, +Y, -Y, +Z, -Z
@@ -105,6 +128,10 @@ bottom
 
 <img src="src/correct_result/auto_stop_spherical_pano3.png"/>
 
+
+<img src="src/correct_result/auto_stop_spherical_pano6.png"/>
+
 ## Acknowledgements
 
 The code for converting an equirectangular panorama to a cube map was taken from [this stackoverflow answer](https://stackoverflow.com/a/34720686/130060).
+
