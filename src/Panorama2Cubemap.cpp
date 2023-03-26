@@ -272,7 +272,7 @@ static void testconvert() {
 #endif
     
     std::cout << "begin: " << getCurrentTimestamp() << std::endl;
-    pano2cube(filename, outfiles, mergedPath, -1);
+    pano2cube(filename, outfiles, -1, mergedPath);
     std::cout << "end: " << getCurrentTimestamp() << std::endl;
 }
 
@@ -373,7 +373,7 @@ int main(int argc, const char * argv[]) {
     std::string mergedPath = dir_path + "/auto_stop_spherical_pano6.png";
 #endif
     
-    pano2cube(infile, outfiles, mergedPath, -1);
+    pano2cube(infile, outfiles, -1, mergedPath);
     
     printf("save images to path:\n");
     for (auto& path : outfiles) {
