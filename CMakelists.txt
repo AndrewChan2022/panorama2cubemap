@@ -19,4 +19,5 @@ message(STATUS "${DIR_SRCS}")
 # exe and lib
 add_executable( pano2cube ${DIR_SRCS} )
 target_link_libraries( pano2cube ${OpenCV_LIBS} )
+target_compile_definitions( pano2cube PRIVATE _USE_MATH_DEFINES )
 
