@@ -329,8 +329,7 @@ int main(int argc, const char * argv[]) {
         printf("no input file, correct format:\npano2cube input_file\n");
         return -1;
     }
-    
-#ifdef _WIN64
+
     std::string file_path = argv[1];
     
     std::string dir_path = ".";
@@ -342,39 +341,21 @@ int main(int argc, const char * argv[]) {
     file_name = file_name.substr(0, file_path.rfind("."));
     
     std::string infile = file_path;
-    
-    std::vector<std::string> outfiles = {
-        dir_path + "\\" + file_name + "0.png",
-        dir_path + "\\" + file_name + "1.png",
-        dir_path + "\\" + file_name + "2.png",
-        dir_path + "\\" + file_name + "3.png",
-        dir_path + "\\" + file_name + "4.png",
-        dir_path + "\\" + file_name + "5.png",
-    };
-    std::string mergedPath = dir_path + "\\auto_stop_spherical_pano6.png";
-#else
-    std::string file_path = argv[1];
-    
-    std::string dir_path = ".";
-    std::string file_name = file_path;
-    if (file_path.rfind("/") != std::string::npos) {
-        dir_path = file_path.substr(0, file_path.rfind("/"));
-        file_name = file_path.substr(file_path.rfind("/") + 1);
-    }
-    file_name = file_name.substr(0, file_name.rfind("."));
-    
-    std::string infile = file_path;
-    
-    std::vector<std::string> outfiles = {
-        dir_path + "/" + file_name + "0.png",
-        dir_path + "/" + file_name + "1.png",
-        dir_path + "/" + file_name + "2.png",
-        dir_path + "/" + file_name + "3.png",
-        dir_path + "/" + file_name + "4.png",
-        dir_path + "/" + file_name + "5.png",
-    };
-    std::string mergedPath = dir_path + "/auto_stop_spherical_pano6.png";
+
+    char const *slash = "/";
+#if defined(_WINDOWS)
+	slash = "\\";
 #endif
+
+    std::vector<std::string> outfiles = {
+        dir_path + slash + file_name + "0.png",
+        dir_path + slash + file_name + "1.png",
+        dir_path + slash + file_name + "2.png",
+        dir_path + slash + file_name + "3.png",
+        dir_path + slash + file_name + "4.png",
+        dir_path + slash + file_name + "5.png",
+    };
+	std::string mergedPath = dir_path + slash + file_name + "6.png";
     
     pano2cube(infile, outfiles, -1, mergedPath);
     
