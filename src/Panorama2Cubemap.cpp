@@ -180,7 +180,7 @@ bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width
     
     // read input
     cv::Mat in;
-    in = cv::imread( inpath, 1 );  // 50ms
+    in = cv::imread( inpath, cv::IMREAD_UNCHANGED ); // 50ms
     if (in.rows == 0) {
         printf("file not exsit: %s\n", inpath.c_str());
         return false;
@@ -292,7 +292,7 @@ static void testconvertAndView() {
 #endif
     
     cv::Mat in;
-    in = cv::imread( filename, 1 );
+    in = cv::imread( filename, cv::IMREAD_UNCHANGED );
     
     //std::time_t t = std::time(0);
     //std::cout << "begin: " << std::ctime(&t) << std::endl;
