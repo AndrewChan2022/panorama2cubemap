@@ -1,8 +1,11 @@
 //
-//  Panorama2Cubemap.cpp
-//  pano2cube
+// pano2cube (c) 2022-2025 by Emanuel Jobstl, AndrewChan2022, and Contributors
 //
-//  Created by AndrewChan2022 on 7/20/22.
+// pano2cube is licensed under a
+// Creative Commons Attribution-ShareAlike 3.0 Unported License.
+//
+// You should have received a copy of the license along with this
+// work.  If not, see <http://creativecommons.org/licenses/by-sa/3.0/>.
 //
 
 #include "Panorama2Cubemap.hpp"
