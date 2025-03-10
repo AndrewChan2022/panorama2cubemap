@@ -338,7 +338,9 @@ int main(int argc, const char * argv[]) {
         dir_path = file_path.substr(0, file_path.rfind("/"));
         file_name = file_path.substr(file_path.rfind("/") + 1);
     }
-    file_name = file_name.substr(0, file_path.rfind("."));
+	auto dot = file_path.rfind( "." );
+	std::string ext = file_name.substr( dot );
+	file_name = file_name.substr( 0, dot );
     
     std::string infile = file_path;
 
@@ -348,14 +350,14 @@ int main(int argc, const char * argv[]) {
 #endif
 
     std::vector<std::string> outfiles = {
-        dir_path + slash + file_name + "0.png",
-        dir_path + slash + file_name + "1.png",
-        dir_path + slash + file_name + "2.png",
-        dir_path + slash + file_name + "3.png",
-        dir_path + slash + file_name + "4.png",
-        dir_path + slash + file_name + "5.png",
+        dir_path + slash + file_name + "0" + ext,
+        dir_path + slash + file_name + "1" + ext,
+        dir_path + slash + file_name + "2" + ext,
+        dir_path + slash + file_name + "3" + ext,
+        dir_path + slash + file_name + "4" + ext,
+        dir_path + slash + file_name + "5" + ext,
     };
-	std::string mergedPath = dir_path + slash + file_name + "6.png";
+	std::string mergedPath = dir_path + slash + file_name + "6" + ext;
     
     pano2cube(infile, outfiles, -1, mergedPath);
     
