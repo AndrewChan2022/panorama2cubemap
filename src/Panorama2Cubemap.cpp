@@ -1,8 +1,11 @@
 //
-//  Panorama2Cubemap.cpp
-//  pano2cube
+// pano2cube (c) 2022-2025 by Emanuel Jobstl, AndrewChan2022, and Contributors
 //
-//  Created by AndrewChan2022 on 7/20/22.
+// pano2cube is licensed under a
+// Creative Commons Attribution-ShareAlike 3.0 Unported License.
+//
+// You should have received a copy of the license along with this
+// work.  If not, see <http://creativecommons.org/licenses/by-sa/3.0/>.
 //
 
 #include "Panorama2Cubemap.hpp"
@@ -177,7 +180,7 @@ bool pano2cube(std::string inpath, std::vector<std::string>& outpaths, int width
     
     // read input
     cv::Mat in;
-    in = cv::imread( inpath, 1 );  // 50ms
+    in = cv::imread( inpath, cv::IMREAD_UNCHANGED ); // 50ms
     if (in.rows == 0) {
         printf("file not exsit: %s\n", inpath.c_str());
         return false;
@@ -289,7 +292,7 @@ static void testconvertAndView() {
 #endif
     
     cv::Mat in;
-    in = cv::imread( filename, 1 );
+    in = cv::imread( filename, cv::IMREAD_UNCHANGED );
     
     //std::time_t t = std::time(0);
     //std::cout << "begin: " << std::ctime(&t) << std::endl;
@@ -326,8 +329,7 @@ int main(int argc, const char * argv[]) {
         printf("no input file, correct format:\npano2cube input_file\n");
         return -1;
     }
-    
-#ifdef _WIN64
+
     std::string file_path = argv[1];
     
     std::string dir_path = ".";
@@ -336,42 +338,26 @@ int main(int argc, const char * argv[]) {
         dir_path = file_path.substr(0, file_path.rfind("/"));
         file_name = file_path.substr(file_path.rfind("/") + 1);
     }
-    file_name = file_name.substr(0, file_path.rfind("."));
+	auto dot = file_path.rfind( "." );
+	std::string ext = file_name.substr( dot );
+	file_name = file_name.substr( 0, dot );
     
     std::string infile = file_path;
-    
-    std::vector<std::string> outfiles = {
-        dir_path + "\\" + file_name + "0.png",
-        dir_path + "\\" + file_name + "1.png",
-        dir_path + "\\" + file_name + "2.png",
-        dir_path + "\\" + file_name + "3.png",
-        dir_path + "\\" + file_name + "4.png",
-        dir_path + "\\" + file_name + "5.png",
-    };
-    std::string mergedPath = dir_path + "\\auto_stop_spherical_pano6.png";
-#else
-    std::string file_path = argv[1];
-    
-    std::string dir_path = ".";
-    std::string file_name = file_path;
-    if (file_path.rfind("/") != std::string::npos) {
-        dir_path = file_path.substr(0, file_path.rfind("/"));
-        file_name = file_path.substr(file_path.rfind("/") + 1);
-    }
-    file_name = file_name.substr(0, file_name.rfind("."));
-    
-    std::string infile = file_path;
-    
-    std::vector<std::string> outfiles = {
-        dir_path + "/" + file_name + "0.png",
-        dir_path + "/" + file_name + "1.png",
-        dir_path + "/" + file_name + "2.png",
-        dir_path + "/" + file_name + "3.png",
-        dir_path + "/" + file_name + "4.png",
-        dir_path + "/" + file_name + "5.png",
-    };
-    std::string mergedPath = dir_path + "/auto_stop_spherical_pano6.png";
+
+    char const *slash = "/";
+#if defined(_WINDOWS)
+	slash = "\\";
 #endif
+
+    std::vector<std::string> outfiles = {
+        dir_path + slash + file_name + "0" + ext,
+        dir_path + slash + file_name + "1" + ext,
+        dir_path + slash + file_name + "2" + ext,
+        dir_path + slash + file_name + "3" + ext,
+        dir_path + slash + file_name + "4" + ext,
+        dir_path + slash + file_name + "5" + ext,
+    };
+	std::string mergedPath = dir_path + slash + file_name + "6" + ext;
     
     pano2cube(infile, outfiles, -1, mergedPath);
     
